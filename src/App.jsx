@@ -1,7 +1,12 @@
+import { RouterProvider } from "react-router-dom";
+import { router } from "./Routes";
+
 function App () {
+
     return(
         <>
-            Simple
+            <RouterProvider router={router} />
+            <NavBar />
         </>
     )
 }
