@@ -4,10 +4,9 @@ import { router } from "./Routes";
 function App () {
 
     return(
-        <>
-            <RouterProvider router={router} />
-            <NavBar />
-        </>
+        <RouterProvider router={router}>
+            {/* <NavBar /> */}
+        </RouterProvider>
     )
 }
 
