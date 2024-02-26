@@ -1,5 +1,0 @@
-export * from './Home'
-export * from './Contents'
-export * from './PrivateStroy'
-export * from './PublicStory'
-export * from './WriteStory'
