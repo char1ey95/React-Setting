@@ -38,3 +38,37 @@ function App () {
 
 - 에러페이지 핸들링을 할 수 있다
 - 데이터 로딩, 데이터 변경시 렌더링 오류가 발생할 경우 Error 핸들링을 할 수 있다
+- `useRouteError`는 발생된 에러를 반환한다
+- `errorElement` 속성을 추가하여 Error 핸들링을 할 수 있다
+    - 현재로선 지정하지 않은 URL로 요청을 했을 경우 `Not Found`를 반환할 수 있다
+        - 무한 로딩(스피너), 응답하지 않는 페이지, 빈 페이지 등이 나오는 대신에 error 컴포넌트가 나오게 된다
+    - 추후에 다른 에러들에 대한 핸들링도 추가로 학습이 필요하다
+
+
+```js
+import { createBrowserRouter } from 'react-router-dom';
+import { useRouteError } from "react-router-dom";
+
+function ErrorPage(){
+    const error = useRouteError();
+    console.error(error);
+
+    return(
+        <div id="error-page">
+            <h1>Error Page</h1>
+            <p>
+                <i>{error.statusText || error.message}</i>
+            </p>
+        </div>
+    )
+}
+
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />
+        errorElement: <ErrorPage />
+    }
+])
+```
