@@ -134,3 +134,12 @@ import { Link } from 'react-router-dom';
 <Link to={`/contacts/1`}>Your Name</Link>
 
 ```
+
+### Loading Data
+
+- URL Segment(path), Layouts(Components), Data 들이 서로 매칭되어 있으며, 이러한 점을 이용해 React-Router는 데이터를 쉽게 가져올 수 있다(GET 요청)
+- `loader`와 `useLoaderData`를 이용하여 데이터를 로드할 수 있다
+    - `loader`에 데이터를 요청하는 함수를 지정하면 해당 path의 컴포넌트가 열리기 전에 실행이 된다
+    - 가져온 데이터를 `useLoaderData`를 이용하여 해당 페이지에서 사용할 수 있다
+    - loader를 추가한 컴포넌트에서 사용이 가능하며, Nested 경로에 해당하는 컴포넌트라고 하더라도 해당 데이터를 사용할 수 없다
+- 가져온 데이터를 UI와 동기화 시키기가 간단하다
