@@ -7,7 +7,7 @@
 - 우선, Browser Router를 생성하여, 클라이언트 사이드의 라우팅을 활성화 해야한다
     - createBrowserRouter에 path, element값을 넣은 객체 배열을 인자로 넣어주어야 한다
         - `path`, `element` 이외에도 loader, id, action, handle 등의 값을 지정하여 사용할 수도 있다
-```tsx
+```jsx
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -45,7 +45,7 @@ function App () {
     - 추후에 다른 에러들에 대한 핸들링도 추가로 학습이 필요하다
 
 
-```js
+```jsx
 import { createBrowserRouter } from 'react-router-dom';
 import { useRouteError } from "react-router-dom";
 
@@ -71,4 +71,66 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     }
 ])
+```
+
+### Nested Routes
+
+- Root Layout 적용을 위해서 중첩 라우팅을 사용해야한다
+- children 속성을 통해 중첩라우팅을 작성하고, Outlet을 통해서 자식 속성이 나타날 위치를 지정한다
+
+```jsx
+import { createBrowserRouter } from 'react-router-dom';
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "contacts/:contactId",
+                element: <Contact />
+            }
+        ]
+    }
+])
+```
+
+```js
+import { Outlet } from 'react-router-dom';
+
+export default function Root(){
+    return(
+        <>
+            {/* 사용중인 다른 컴포넌트들... */}
+            <Outlet />
+        </>
+    )
+}
+```
+
+
+### Client Side Routing
+
+<br />
+
+현재 작성된 코드로 사이드 바의 버튼을 클릭하면 React-Router를 사용하지 않고, URL에 대한 요청을 진행한다.
+
+<br />
+
+Client Side Routing(Link 컴포넌트)를 사용하면 URL에 대한 요청없이 해당 화면을 사용할 수 있다.
+
+- a 태그로 작성된 컴포넌트를 Link 태그로 변경, href 속성 또한 to 속성으로 변경해주면 적용할 수 있다.
+- Link로 코드를 변경하게되면 더 이상 URL로 요청을 보내지 않는 것을 알 수 있다.
+
+```jsx
+import { Link } from 'react-router-dom';
+
+/* a 태그로 작성된 코드를 Link 컴포넌트로 변경해주면 Client Side Routing을 진행할 수 있다
+ *
+ * <a href={`/contacts/1`}>Your Name</a>
+ */
+
+<Link to={`/contacts/1`}>Your Name</Link>
+
 ```
